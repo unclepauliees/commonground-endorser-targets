@@ -627,11 +627,11 @@ a:hover { text-decoration: underline; }
     <ul class="nav-links" role="list">
       <li><a href="#section-01">01 CEFI</a></li>
       <li><a href="#section-02">02 Portfolio</a></li>
-      <li><a href="#section-03">03 General</a></li>
-      <li><a href="#section-04">04 Black</a></li>
-      <li><a href="#section-05">05 Hispanic</a></li>
+      <li><a href="#section-03" onclick="navToPanel('gm'); return false">03 General</a></li>
+      <li><a href="#section-03" onclick="navToPanel('aa'); return false">04 Black</a></li>
+      <li><a href="#section-03" onclick="navToPanel('hisp'); return false">05 Hispanic</a></li>
       <li><a href="#section-06">06 Risk</a></li>
-      <li><a href="..">← GTM v2</a></li>
+      <li><a href="#" style="opacity:.45;pointer-events:none;cursor:default">← GTM v2</a></li>
     </ul>
     <button class="nav-pdf" onclick="downloadPDF()">PDF ↓</button>
   </div>
@@ -2734,6 +2734,14 @@ a:hover { text-decoration: underline; }
 
 <script>
 /* ===== MARKET TABS ===== */
+function navToPanel(market) {
+  var btn = document.querySelector('.market-tab[aria-controls="panel-' + market + '"]');
+  if (btn) {
+    switchTab(market, btn);
+    var s = document.getElementById('section-03');
+    if (s) s.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 function switchTab(market, btn) {
   document.querySelectorAll('.market-tab').forEach(b => {
     b.classList.remove('active');
